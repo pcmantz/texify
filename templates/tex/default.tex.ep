@@ -1,0 +1,11 @@
+% my ($content) = @_;
+%
+\documentclass[10pt]{article}
+
+\pagestyle{empty}
+
+\begin{document}
+
+  <%== $content %>
+
+\end{document}

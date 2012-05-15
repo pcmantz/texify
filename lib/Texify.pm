@@ -1,18 +1,20 @@
 package Texify;
 use Mojo::Base 'Mojolicious';
 
-# This method will run once at server start
 sub startup {
     my $self = shift;
 
-    # Documentation browser under "/perldoc"
-    $self->plugin('PODRenderer');
+    $self->plugin('PODRenderer');    # docs at  "/perldoc"
+    $self->plugin('Config');
 
     # Router
     my $r = $self->routes;
 
     # Normal route to controller
     $r->get('/')->to('example#welcome');
+
+    # if it isn't predefined, assume it's LaTeX
+    $r->get('/*content')->to('latex#image');
 }
 
 1;
