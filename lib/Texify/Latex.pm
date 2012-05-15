@@ -15,7 +15,7 @@ use Data::Printer;
 
 has tmpl_fname => sub {
     my $self = shift;
-    $self->app->home->rel_file($self->app->config->{template_file});
+    $self->app->home->rel_file($self->config('template_file'));
 };
 
 sub welcome {
@@ -58,7 +58,7 @@ sub make_dvi {
     close $fh;
 
     my @latex_cmd;
-    push @latex_cmd, $self->app->config->{latex} || 'latex';
+    push @latex_cmd, $self->config('latex') || 'latex';
     push @latex_cmd, qw(-interaction=batchmode -output-format=dvi);
     push @latex_cmd, $fname;
 
@@ -77,7 +77,7 @@ sub make_dvi {
     }
 
     $self->stash(tmp_dir => $dir);
-    return $self->make_img();
+    $self->make_img();
 }
 
 sub make_img {
@@ -87,7 +87,7 @@ sub make_img {
     my $sha_key = $self->stash->{sha_key};
 
     my @dvipng_cmd;
-    push @dvipng_cmd, $self->app->config->{dvipng} || 'dvipng';
+    push @dvipng_cmd, $self->config('dvipng') || 'dvipng';
     push @dvipng_cmd, qw(-bg transparent);
     push @dvipng_cmd, "$sha_key.dvi";
 
