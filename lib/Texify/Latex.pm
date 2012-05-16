@@ -5,6 +5,7 @@ use 5.014;
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Template;
 use Mojo::Home;
+use Mojo::IOLoop;
 
 use Cwd::Guard qw(cwd_guard);
 use File::Temp qw(tempfile tempdir);
@@ -25,21 +26,17 @@ sub welcome {
 sub image {
     my $self = shift;
 
-    $self->app->log->debug(p $self->app->config);
-
     my $content = $self->param('content');
-    my $latex = Mojo::Template->new->render_file($self->tmpl_fname, $content);
-    $self->app->log->debug("latex: $latex");
 
-    my $sha_key = (sha256_base64($latex) =~ s{/}{-}gr);
+    # this may take a while...
+    $self->render_later;
+    Mojo::IOLoop->stream($self->tx->connection)->timeout(300);
 
-    if (!-e qq{public/$sha_key.png}) {
-        $self->stash(latex   => $latex);
-        $self->stash(sha_key => $sha_key);
-        $self->make_dvi();
-    }
+    my $image_fname = $self->app->images->get($content);
 
-    return $self->render_static(qq{public/$sha_key.png});
+    return defined $image_fname
+        ? $self->render_static($image_fname)
+        : $self->render_exception('could not find or render tex');
 }
 
 # XXX: move the 'make_*' functions into a model
