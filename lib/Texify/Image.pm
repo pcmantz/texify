@@ -34,7 +34,6 @@ sub get {
     # $self->app->log->debug('images->app: ' . p $self->app);
 
     my $image_fname = $self->find($content) // $self->add($content);
-
     die "image $image_fname failed to render!" if !defined $image_fname;
 
     my $static_image_fname = ($image_fname =~ s{^.*public/}{}r);
@@ -55,15 +54,14 @@ sub add {
     my ($self, $content) = @_;
 
     my ($latex, $sha_key) = $self->_c2lh($content);
-    my $image_fname = $self->image_dir . "/$sha_key.png";
-    $self->app->log->debug("image_fname: $image_fname");
-
     $self->_make_dvi($latex, $sha_key);
+
     my $tmp_image_fname = $self->_make_image($sha_key);
     $self->app->log->debug("tmp_image_fname: $tmp_image_fname");
     -e $tmp_image_fname
         || die "error: $tmp_image_fname doesn't exist!";
 
+    my $image_fname = $self->image_dir . "/$sha_key.png";
     copy($tmp_image_fname, $image_fname)
         || die "copy: $tmp_image_fname -> $image_fname failed!";
 
