@@ -1,6 +1,6 @@
 % my ($content) = @_;
 %
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 
 \pagestyle{empty}
 
