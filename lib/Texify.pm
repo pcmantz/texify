@@ -15,6 +15,9 @@ has images => sub {
 sub startup {
     my $self = shift;
 
+    # Secret
+    $self->secret($self->config('secret'));
+
     # Plugins
     $self->plugin('PODRenderer');    # docs at  "/perldoc"
     $self->plugin('Config');
