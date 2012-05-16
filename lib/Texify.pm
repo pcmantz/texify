@@ -26,10 +26,14 @@ sub startup {
     my $r = $self->routes;
 
     # Normal route to controller
-    $r->get('/')->to('example#welcome');
+    $r->get('/')->to('root#index');
 
     # if it isn't predefined, assume it's LaTeX
-    $r->get('/*content')->to('latex#image');
+    # $r->get('/*content')->to('latex#image');
+
+    # POST controller
+    $r->post('/render')->to('latex#image');
+
 }
 
 1;
