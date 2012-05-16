@@ -30,9 +30,6 @@ has tmpl_fname => sub {
 sub get {
     my ($self, $content) = @_;
 
-    # XXX: debug: remove
-    # $self->app->log->debug('images->app: ' . p $self->app);
-
     my $image_fname = $self->find($content) // $self->add($content);
     die "image $image_fname failed to render!" if !defined $image_fname;
 
@@ -57,7 +54,6 @@ sub add {
     $self->_make_dvi($latex, $sha_key);
 
     my $tmp_image_fname = $self->_make_image($sha_key);
-    $self->app->log->debug("tmp_image_fname: $tmp_image_fname");
     -e $tmp_image_fname
         || die "error: $tmp_image_fname doesn't exist!";
 
@@ -85,24 +81,11 @@ sub _make_dvi {
     push @latex_cmd, qw(-interaction=batchmode -output-format=dvi);
     push @latex_cmd, $tex_fname;
 
-    $self->app->log->debug(p @latex_cmd);
-
     COMMAND: {
-
-        # XXX: should probably not render here
         my $guard = cwd_guard($self->tmp_dir)
-            || $self->render_exception(
-            "can't change dir: $Cwd::Guard::Error");
+            || die "can't change dir: $Cwd::Guard::Error";
 
-        $self->app->log->debug('in directory: ' . getcwd);
-
-        system @latex_cmd;
-        if ($? != 0) {
-
-            # XXX: we don't check the return code here, we should probably
-            # just die or throw some other exception
-            return undef;
-        }
+        system(@latex_cmd) == 0 || die qq{latex command failed: $?};
     }
 }
 
@@ -116,18 +99,11 @@ sub _make_image {
 
     my $image_fname = $self->tmp_dir . '/' . $sha_key . '1.png';
     COMMAND: {
-
-        # XXX: should probably not render here
         my $guard = cwd_guard($self->tmp_dir)
-            || $self->render_exception(
-            "can't change dir: $Cwd::Guard::Error");
-
-        $self->app->log->debug('in directory: ' . getcwd);
+            || die "can't change dir: $Cwd::Guard::Error";
 
         system(@dvipng_cmd) == 0
             || die qq{dvipng command failed: $?};
-
-        die qq{error: $image_fname doesn't exist!} if !-e $image_fname;
     }
 
     return $image_fname;
@@ -138,10 +114,6 @@ sub _c2lh {
 
     $self->app->log->debug('content: ' . $content);
     my $latex = Mojo::Template->new->render_file($self->tmpl_fname, $content);
-
-    # XXX: debug
-    # $self->app->log->debug("latex: $latex");
-
     my $sha_key = (sha256_base64($latex) =~ s{/}{-}gr);
 
     return ($latex, $sha_key);
