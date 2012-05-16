@@ -3,6 +3,7 @@
 # copy this file to texify<.environment>.conf
 
 {
+    secret        => 'texify',
     latex         => '/usr/bin/pdflatex',
     dvipng        => '/usr/bin/dvipng',
     template_file => 'templates/tex/default.tex.ep'
