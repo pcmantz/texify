@@ -1,3 +1,4 @@
 /log
 /texify.conf
 /texify.*.conf
+/public/img/*.png
