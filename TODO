@@ -1,0 +1,38 @@
+
+* Model
+** Async & Concurrent Rendering
+   latex and dvipng can be run concurrently.  We don't need to block on the
+   .dvi file rendering since dvipng doesn't need a complete file to start.
+** Trim excess transparent boundaries w/ ImageMagick
+   The dvipng step removes some, but not all of the dead transparent pixels.
+   Remove them all with ImageMagick.
+
+* Controller
+** Content Types
+   Add content handling by Accept header.  Mojo appears to support this out of
+   the box, so see how we can use it.  This may force a more object-oriented
+   approach to the model, rather than simple path names.
+** Revisit Convenience Routing
+   A feature of the current texify.com site is embedding the TeX equation into
+   the URL path to the image. That was useful for testing rendering, but a
+   pain when writing the HTML for the application (what should have been 404
+   errors were being replaced with png files).  See if it's worthwhile to add
+   back in.
+
+* View
+** Styling
+   I'm not a designer, but the site could use better styling. Go minimalist to
+   dodge most of the issue, methinks.
+** Remove all the junk text.
+   Next time, use Lorem Ipsum.  Or, use Lorem Ipsum right now!
+** Icons
+   I disabled these because I didn't see a need for them.  Investigate whether
+   using these is worthwhile.
+** Header Strip
+   I have a hardcoded header strip which doesn't add any value, since there
+   aren't any other pages.  I should add some contact information and
+   description text for good measure.
+
+# Local Variables:
+# mode: org
+# End:
