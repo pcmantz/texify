@@ -4,7 +4,11 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-  VERSION   => '0.01',
-  PREREQ_PM => {'Mojolicious' => '2.95'},
-  test      => {TESTS => 't/*.t'}
+    VERSION   => '0.01',
+    PREREQ_PM => {
+        'Cwd::Guard'  => '0.01',
+        'Mojolicious' => '2.95',
+        'Digest::SHA' => '5.71',
+    },
+    test => { TESTS => 't/*.t' }
 );

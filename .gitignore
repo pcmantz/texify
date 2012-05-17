@@ -2,3 +2,5 @@
 /texify.conf
 /texify.*.conf
 /public/img/*.png
+/blib
+/pm_to_blib
