@@ -6,6 +6,9 @@
 ** Trim excess transparent boundaries w/ ImageMagick
    The dvipng step removes some, but not all of the dead transparent pixels.
    Remove them all with ImageMagick.
+** Investigate Cwd::Guard
+   I grabbed this module in a hurry because it did exactly what I needed it
+   to, but I didn't investigate the quality of the code in depth.
 
 * Controller
 ** Content Types
@@ -32,6 +35,11 @@
    I have a hardcoded header strip which doesn't add any value, since there
    aren't any other pages.  I should add some contact information and
    description text for good measure.
+
+* Build
+** Flesh out Makefile.PL
+   Most people run a webapp straight out of the directory, but it may be
+   worthwhile to get the makefile working.
 
 # Local Variables:
 # mode: org
