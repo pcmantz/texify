@@ -1,0 +1,9 @@
+.git.*
+blib.*
+public/img/.*\.png$		# generated images
+
+.*~$
+.*\.bak$
+
+^\#.*
+texify.*\.conf$          # get your own!
