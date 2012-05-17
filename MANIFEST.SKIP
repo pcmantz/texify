@@ -1,9 +1,10 @@
 .git.*
 blib.*
-public/img/.*\.png$		# generated images
+public/img/.*\.png$         # generated images
 
 .*~$
 .*\.bak$
 
 ^\#.*
-texify.*\.conf$          # get your own!
+texify.*\.conf$ # get your own!
+^Makefile$        # safer to just generate it
