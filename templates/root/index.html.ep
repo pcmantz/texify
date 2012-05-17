@@ -10,16 +10,15 @@
       <div class="span6">
         <p>Here is some text; this is where I intend to drop a form to hit my render controller. I am going to insert a bunch of freaking test in here to trigger a wrap and see exactly how this layout is working.</p>
 
-        <form method="POST" id="tex-box" action="/render">
-          <textarea name="content" id="tex-box-content" class="span12" title="Put your TeX here!"></textarea>
-
+        <form method="post" id="tex-form" action="/render">
+          <textarea name="content" id="tex-form-content" class="span12" title="Put your TeX here!" rows="5"></textarea>
           <input type="submit" />
         </form>
       </div>
       <div class="span6">
         <p>Here is some more text; I plan on putting an image box that gets dynamically updated here that displays the rendered text.</p>
+        <img id="tex-image" src="" alt="" />
       </div>
     </div>
   </div>
-
 </div>
