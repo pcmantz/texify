@@ -1,0 +1,12 @@
+% layout 'default';
+% title 'Texify: About';
+<div class="container">
+  <h1>About Texify</h1>
+  <p>Texify is a practice application, written by <a href="mailto:pcmantz@gmail.com">Paul C. Mantz</a>. Texify aims to demonstrate a number of concepts:</p>
+  <ul>
+    <li>Usage of the <a href="http://mojolicio.us/">Mojolicious</a> and <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> frameworks in web development</li>
+    <li>Re-use of existing Framework outside the "magic" provided (e.g., using an embedded perl template for LaTeX generation)</li>
+    <li>Using a non-standard component in a web app</li>
+  </ul>
+
+</div>

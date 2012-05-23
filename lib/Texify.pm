@@ -27,6 +27,8 @@ sub startup {
 
     # Normal route to controller
     $r->get('/')->to('root#index');
+    $r->get('/about')->to('root#about');
+    $r->get('/contact')->to('root#contact');
 
     # POST controller
     $r->post('/render')->to('latex#image');

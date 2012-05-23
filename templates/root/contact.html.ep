@@ -1,0 +1,6 @@
+% layout 'default';
+% title 'Texify: Contact';
+<div class="container">
+  <h1>Contact</h1>
+  For all inquiries, please contact <a href="mailto:pcmantz@gmail.com">Paul C. Mantz</a>.
+</div>

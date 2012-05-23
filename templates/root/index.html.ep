@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Texify: ';
+% title 'Texify';
 <div class="container">
   <h1>Welcome to Texify!</h1>
   <h2><%= $message %></h2>
@@ -8,15 +8,14 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="span6">
-        <p>Here is some text; this is where I intend to drop a form to hit my render controller. I am going to insert a bunch of freaking test in here to trigger a wrap and see exactly how this layout is working.</p>
-
+        <p>Try writing some LaTeX!  The default rendering is text mode; you need to manually enable math mode.  If you are new to LaTeX, here is a <a href="http://en.wikibooks.org/wiki/LaTeX">guide</a> To help you get started.</p>
         <form method="post" id="tex-form" action="/render">
           <textarea name="content" id="tex-form-content" class="span12" title="Put your TeX here!" rows="5"></textarea>
           <input type="submit" />
         </form>
       </div>
       <div class="span6">
-        <p>Here is some more text; I plan on putting an image box that gets dynamically updated here that displays the rendered text.</p>
+        <p>Your rendered LaTeX Image will show up below this text after you submit.</p>
         <img id="tex-image" src="" alt="" />
       </div>
     </div>
